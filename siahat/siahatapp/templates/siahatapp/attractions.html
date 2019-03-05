@@ -57,8 +57,8 @@
       <div class="container">
         <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center" data-scrollax-parent="true">
           <div class="col-md-9 ftco-animate text-center" data-scrollax=" properties: { translateY: '70%' }">
-            <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="index.html">Home</a></span> <span>Hotel</span></p>
-            <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '90%', opacity: 5.0 }">Hotels</h1>
+            <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="index.html">Home</a></span> <span>Attractions</span></p>
+            <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '90%', opacity: 5.0 }">Attractions</h1>
           </div>
         </div>
       </div>
@@ -70,10 +70,10 @@
           <div class="col-lg-9">
           	<div class="row">
 
-						{% for h in hotels %}
+						{% for h in attractions %}
           		<div class="col-md-4 ftco-animate">
 		    				<div class="destination">
-		    					<a href="http://127.0.0.1:8000/hotels/details/{{h.id}}" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url({% static h.url_Picture.0|slice:"1:-1" %});">
+		    					<a href="http://127.0.0.1:8000/attractions/details/{{h.id}}" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url({% static h.url_Picture.0|slice:"1:-1" %});">
 					
 		    						<div class="icon d-flex justify-content-center align-items-center">
     							<span class="icon-search2"></span>
@@ -82,20 +82,11 @@
 		    					<div class="text p-3">
 		    						<div class="d-flex">
 		    							<div class="one">
-				    						<h3><a href="http://127.0.0.1:8000/hotels/details/{{h.id}}">{{h.name}}</a></h3>
-				    						<p class="rate">
-													{% with ''|center:h.star_Rating as range %}
-													{% for _ in range %}
-     													<i class="icon-star"></i>
-													{% endfor %}
-													{% endwith %}
-				    							
-				    							<span>{{h.star_Rating}} Rating</span>
-				    						</p>
+				    						<h3><a href="http://127.0.0.1:8000/attractions/details/{{h.id}}">{{h.name}}</a></h3>
 			    						</div>
-			    						<div class="two">
-			    							<span class="price per-price">$40<br><small>/night</small></span>
-		    							</div>
+                                        <div class="two">
+			    							<span class="price per-price">Rs.{{h.ticket_price}}<br><small>/person</small></span>
+		    							</div>                                     
 		    						</div>
 		    						<p>{{h.description|slice:"0:40"}}</p>
 		    						<hr>
