@@ -9,9 +9,9 @@
     <link href="https://fonts.googleapis.com/css?family=Alex+Brush" rel="stylesheet">
     {% load static %}
     <link rel="stylesheet" href="{% static 'siahatapp/css/open-iconic-bootstrap.min.css' %}">
-    {% load static %}
+    
     <link rel="stylesheet" href="{% static 'siahatapp/css/animate.css' %}">
-    {% load static %}
+    
     <link rel="stylesheet" href="{% static 'siahatapp/css/owl.carousel.min.css' %}">
     <link rel="stylesheet" href="{% static 'siahatapp/css/owl.theme.default.min.css' %}">
     <link rel="stylesheet" href="{% static 'siahatapp/css/magnific-popup.css' %}">
@@ -32,20 +32,20 @@
     
   <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
     <div class="container">
-      <a class="navbar-brand" href="index.html">Siahat</a>
+      <a class="navbar-brand" href="/">Siahat</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="oi oi-menu"></span> Menu
       </button>
 
       <div class="collapse navbar-collapse" id="ftco-nav">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
-          <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-          <li class="nav-item active"><a href="hotel.html" class="nav-link">Hotels</a></li>
-          <li class="nav-item active"><a href="restaurants.html" class="nav-link">Restaurants</a></li>
-          <li class="nav-item active"><a href="pois.html" class="nav-link">Attractions</a></li>
-          <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
-          <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+          <li class="nav-item"><a href="/" class="nav-link">Home</a></li>
+          <li class="nav-item"><a href="/about" class="nav-link">About</a></li>
+          <li class="nav-item active"><a href="/hotels" class="nav-link">Hotels</a></li>
+          <li class="nav-item active"><a href="/restaurants" class="nav-link">Restaurants</a></li>
+          <li class="nav-item active"><a href="/attractions" class="nav-link">Attractions</a></li>
+          <li class="nav-item"><a href="/blog" class="nav-link">Blog</a></li>
+          <li class="nav-item"><a href="/contact" class="nav-link">Contact</a></li>
         </ul>
       </div>
     </div>
@@ -67,6 +67,60 @@
 
     <section class="ftco-section ftco-degree-bg">
       <div class="container">
+          <div class="row">
+					<div class="col-lg-3 sidebar">
+        		<div class="sidebar-wrap bg-light ftco-animate">
+        			<h3 class="heading mb-4">Find Hotel</h3>
+        			<form action="/hotels" method="get">
+        				<div class="fields">
+		              <div class="form-group">
+		                <input name="searchbox" type="text" class="form-control" placeholder="Hotel name">
+		              </div>
+		              <div class="form-group">
+		                <div class="select-wrap one-third">
+	                    <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+	                    <select name="price" id="prc" class="form-control" placeholder="Keyword search">
+	                      <option value="">Price range</option>
+	                      <option value="5000">Rs.5000</option>
+	                      <option value="10000">Rs.10000</option>
+	                      <option value="20000">Rs. 20000</option>
+	                      <option value="50000">Rs. 50000</option>
+	                    </select>
+	                  </div>
+		              </div>
+		              <h3 class="heading mb-4">Star Rating</h3>
+                  <div class="form-check">
+									<input name="starrating" type="radio" class="form-check-input" value="5">
+									<label class="form-check-label" for="exampleCheck1">
+										<p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></span></p>
+									</label>
+							  </div>
+							  <div class="form-check">
+						      <input name="starrating" type="radio" class="form-check-input" value="4">
+						      <label class="form-check-label" for="exampleCheck1">
+						    	   <p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star-o"></i></span></p>
+						      </label>
+							  </div>
+							  <div class="form-check">
+						      <input name="starrating" type="radio" class="form-check-input" value="3">
+						      <label class="form-check-label" for="exampleCheck1">
+						      	<p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star-o"></i><i class="icon-star-o"></i></span></p>
+						     </label>
+							  </div>
+							  <div class="form-check">
+							    <input name="starrating" type="radio" class="form-check-input" value="2">
+						      <label class="form-check-label" for="exampleCheck1">
+						      	<p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star-o"></i><i class="icon-star-o"></i><i class="icon-star-o"></i></span></p>
+						      </label>
+							  </div>
+							  
+		              <div class="form-group">
+		                <input name="sbutton" type="submit" class="btn btn-primary py-3 px-5">
+		              </div>
+		            </div>
+	            </form>
+        		</div>
+					</div>
           <div class="col-lg-9">
           	<div class="row">
 
