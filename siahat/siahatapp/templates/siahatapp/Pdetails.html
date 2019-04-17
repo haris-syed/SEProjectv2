@@ -1,6 +1,160 @@
-<html>
-    <head>
-        <title>POI details</title>
-    </head>
-    <p1>POI details page for poi id: {{id}}</p1>
-</html>
+{% extends "siahatapp/mainbase.html" %} 
+ {% load static %}
+ {% block content %}
+    
+    <div class="hero-wrap js-fullheight" style="background-image: url({% static 'siahatapp/images/isloo_1.jpg' %});">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center" data-scrollax-parent="true">
+          <div class="col-md-9 ftco-animate text-center" data-scrollax=" properties: { translateY: '70%' }">
+            <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="/">Home</a></span> <span class="mr-2"><a href="/attractions">Attractions</a></span> <span>Details</span></p>
+            <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Attraction Details</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <section class="ftco-section ftco-degree-bg">
+      <div class="container">
+          <div class="col-lg-9">
+          	<div class="row">
+          		<div class="col-md-12 ftco-animate">
+          			<div class="single-slider owl-carousel">
+
+								{% for pic in attraction.url_Picture %}
+          				<div class="item">
+          					<div class="hotel-img" style="background-image: url({% static pic|slice:"1:-1" %});"></div>
+          				</div>
+								{% endfor %}
+
+          			</div>
+          		</div>
+          		<div class="col-md-12 hotel-single mt-4 mb-5 ftco-animate">
+          			
+          			<h2>{{attraction.name}}</h2>
+          			
+    				<p>{{attraction.description}}</p>
+    						
+          		</div>
+          		<div class="col-md-12 hotel-single ftco-animate mb-5 mt-4">
+          			<h4 class="mb-4">Take A Tour</h4>
+          			<div class="block-16">
+		              <figure>
+		                <img src="{% static attraction.url_Picture.0|slice:"1:-1" %}" alt="Image placeholder" class="img-fluid">
+		                <a href="" class="play-button popup-vimeo"><span class="icon-play"></span></a>
+		              </figure>
+		            </div>
+          		</div>
+          		
+          		
+          		<div class="col-md-12 hotel-single ftco-animate mb-5 mt-4">
+          			<h4 class="mb-4">Review &amp; Ratings</h4>
+          			<div class="row">
+          				<div class="col-md-6">
+          					
+          				</div>
+          			</div>
+          		</div>
+          		<div class="col-md-12 hotel-single ftco-animate mb-5 mt-5">
+          			<h4 class="mb-4">Related Places</h4>
+          			<div class="row">
+
+									{% for a in sim_attractions %}
+				    			<div class="col-md-4">
+				    				<div class="destination">
+				    					<a href="hotel-single.html" class="img img-2" style="background-image: url({% static a.url_Picture.0|slice:"1:-1" %});"></a>
+				    					<div class="text p-3">
+				    						<div class="d-flex">
+				    							<div class="one">
+						    						<h3><a href="http://127.0.0.1:8000/hotels/details/{{a.id}}">{{a.name}}</a></h3>
+						    						
+					    						</div>
+					    						<div class="two">
+					    							<span class="price per-price">{{a.ticket_price}}<br><small>/person</small></span>
+				    							</div>
+				    						</div>
+				    						<p>{{a.description|slice:"0:40"}}</p>
+				    						<hr>
+				    						<p class="bottom-area d-flex">
+				    							<span><i class="icon-map-o"></i> Islamabad</span> 
+				    						</p>
+				    					</div>
+				    				</div>
+				    			</div>
+									
+									{% endfor %}
+          			</div>
+          		</div>
+
+          	</div>
+          </div> <!-- .col-md-8 -->
+        </div>
+      </div>
+    </section> <!-- .section -->
+
+    <footer class="ftco-footer ftco-bg-dark ftco-section">
+      <div class="container">
+        <div class="row mb-5">
+          <div class="col-md">
+            <div class="ftco-footer-widget mb-4">
+              <h2 class="ftco-heading-2">Siahat</h2>
+              <p>Make the best out of your vacation in the wonderful city of Islamabad</p>
+              <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
+                <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+                <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
+                <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md">
+            <div class="ftco-footer-widget mb-4 ml-md-5">
+              <h2 class="ftco-heading-2">Information</h2>
+              <ul class="list-unstyled">
+                <li><a href="#" class="py-2 d-block">About</a></li>
+                <li><a href="#" class="py-2 d-block">Service</a></li>
+                <li><a href="#" class="py-2 d-block">Terms and Conditions</a></li>
+                <li><a href="#" class="py-2 d-block">Become a partner</a></li>
+                <li><a href="#" class="py-2 d-block">Best Price Guarantee</a></li>
+                <li><a href="#" class="py-2 d-block">Privacy and Policy</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md">
+             <div class="ftco-footer-widget mb-4">
+              <h2 class="ftco-heading-2">Customer Support</h2>
+              <ul class="list-unstyled">
+                <li><a href="#" class="py-2 d-block">FAQ</a></li>
+                <li><a href="#" class="py-2 d-block">How it works</a></li>
+                <li><a href="#" class="py-2 d-block">Contact Us</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md">
+            <div class="ftco-footer-widget mb-4">
+            	<h2 class="ftco-heading-2">Have a Question?</h2>
+            	<div class="block-23 mb-3">
+	              <ul>
+	                <li><span class="icon icon-map-marker"></span><span class="text">A.K. Brohi Road, H-11/4, Islamabad, Pakistan</span></li>
+	                <li><a href="#"><span class="icon icon-phone"></span><span class="text">0900 78601</span></a></li>
+	                <li><a href="#"><span class="icon icon-envelope"></span><span class="text">info@siahat.com</span></a></li>
+	              </ul>
+	            </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 text-center">
+
+           <p>
+  					Siahat &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved
+  					</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+	
+  
+
+  {%endblock%}

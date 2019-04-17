@@ -5,7 +5,16 @@ from .models import *
 # Create your views here.
 
 def index(request):
-    return render(request,'siahatapp/index.html')
+
+    hotels = Hotels.objects.all()[:4]
+    restaurants=Restaurants.objects.all()[:4]
+    attractions = Attractions.objects.all()[:4]
+    context={
+        'hotels':hotels,
+        'restaurants':restaurants,
+        'attractions':attractions
+    }
+    return render(request,'siahatapp/index.html',context)
 
 def hotels(request):
     context={}
@@ -84,12 +93,18 @@ def Hdetails(request,id):
 def Rdetails(request,id):
     restaurant = Restaurants.objects.get(id=id)
     similarrts = Restaurants.objects.all().filter(star_Rating = restaurant.star_Rating).filter(~Q(id=restaurant.id))[:3]
+    menu_items = R_menu.objects.filter(restaurant_id__id=id)
     context = {'id':id ,
             'restaurant':restaurant,
-            'sim_rts':similarrts
+            'sim_rts':similarrts,
+            'menu_items':menu_items
     }
     return render(request,'siahatapp/Rdetails.html',context)
 
 def Pdetails(request,id):
-    context = {'id':id}
+    attraction = Attractions.objects.get(id=id)
+    sim_attractions= Attractions.objects.all().filter(ticket_price__lte=attraction.ticket_price).filter(~Q(id=attraction.id))[:3]
+    context = {'id':id,
+    'attraction':attraction,
+    'sim_attractions':sim_attractions}
     return render(request,'siahatapp/Pdetails.html',context)

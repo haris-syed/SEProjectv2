@@ -1,63 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Siahat</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
-    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Alex+Brush" rel="stylesheet">
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'siahatapp/css/open-iconic-bootstrap.min.css' %}">
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'siahatapp/css/animate.css' %}">
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'siahatapp/css/owl.carousel.min.css' %}">
-    <link rel="stylesheet" href="{% static 'siahatapp/css/owl.theme.default.min.css' %}">
-    <link rel="stylesheet" href="{% static 'siahatapp/css/magnific-popup.css' %}">
-
-    <link rel="stylesheet" href="{% static 'siahatapp/css/aos.css' %}">
-
-    <link rel="stylesheet" href="{% static 'siahatapp/css/ionicons.min.css' %}">
-
-    <link rel="stylesheet" href="{% static 'siahatapp/css/bootstrap-datepicker.css' %}">
-    <link rel="stylesheet" href="{% static 'siahatapp/css/jquery.timepicker.css' %}">
-
-    
-    <link rel="stylesheet" href="{% static 'siahatapp/css/flaticon.css' %}">
-    <link rel="stylesheet" href="{% static 'siahatapp/css/icomoon.css' %}">
-    <link rel="stylesheet" href="{% static 'siahatapp/css/style.css' %}">
-  </head>
-  <body>
-    
-  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-    <div class="container">
-      <a class="navbar-brand" href="/">Siahat</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="oi oi-menu"></span> Menu
-      </button>
-
-      <div class="collapse navbar-collapse" id="ftco-nav">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item"><a href="/" class="nav-link">Home</a></li>
-          <li class="nav-item"><a href="/about" class="nav-link">About</a></li>
-          <li class="nav-item active"><a href="/hotels" class="nav-link">Hotels</a></li>
-          <li class="nav-item active"><a href="/restaurants" class="nav-link">Restaurants</a></li>
-          <li class="nav-item active"><a href="/attractions" class="nav-link">Attractions</a></li>
-          <li class="nav-item"><a href="/blog" class="nav-link">Blog</a></li>
-          <li class="nav-item"><a href="/contact" class="nav-link">Contact</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-    <!-- END nav -->
+{% extends "siahatapp/mainbase.html" %} 
+ {% load static %}
+ {% block content %}
     
     <div class="hero-wrap js-fullheight" style="background-image: url({% static 'siahatapp/images/rts_1.jpg' %});">
       <div class="overlay"></div>
       <div class="container">
         <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center" data-scrollax-parent="true">
           <div class="col-md-9 ftco-animate text-center" data-scrollax=" properties: { translateY: '70%' }">
-            <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="/index">Home</a></span> <span>Restaurant</span></p>
+            <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="/">Home</a></span> <span>Restaurants</span></p>
             <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '90%', opacity: 5.0 }">Restaurants</h1>
           </div>
         </div>
@@ -247,27 +197,4 @@
 	   
   
 
-  <!-- loader -->
-  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
-
-
-  <script src="{% static 'siahatapp/js/jquery.min.js' %}"></script>
-  <script src="{% static 'siahatapp/js/jquery-migrate-3.0.1.min.js' %}"></script>
-  <script src="{% static 'siahatapp/js/popper.min.js' %}"></script>
-  <script src="{% static 'siahatapp/js/bootstrap.min.js' %}"></script>
-  <script src="{% static 'siahatapp/js/jquery.easing.1.3.js' %}"></script>
-  <script src="{% static 'siahatapp/js/jquery.waypoints.min.js' %}"></script>
-  <script src="{% static 'siahatapp/js/jquery.stellar.min.js' %}"></script>
-  <script src="{% static 'siahatapp/js/owl.carousel.min.js' %}"></script>
-  <script src="{% static 'siahatapp/js/jquery.magnific-popup.min.js' %}"></script>
-  <script src="{% static 'siahatapp/js/aos.js' %}"></script>
-  <script src="{% static 'siahatapp/js/jquery.animateNumber.min.js' %}"></script>
-  <script src="{% static 'siahatapp/js/bootstrap-datepicker.js' %}"></script>
-  <script src="{% static 'siahatapp/js/jquery.timepicker.min.js' %}"></script>
-  <script src="{% static 'siahatapp/js/scrollax.min.js' %}"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-  <script src="{% static 'siahatapp/js/google-map.js' %}"></script>
-  <script src="{% static 'siahatapp/js/main.js' %}"></script>
-    
-  </body>
-</html>
+ {% endblock %}

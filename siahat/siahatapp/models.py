@@ -61,7 +61,8 @@ i_type = (
 class R_menu(models.Model):
     item_name=models.CharField(max_length=100,blank=True, null=True)
     item_cost=models.IntegerField(blank=True, null=True)
-    _type = models.CharField(max_length=6, choices=i_type, default='food')
+    item_type = models.CharField(max_length=6, choices=i_type, default='food')
+    restaurant_id = models.ForeignKey(Restaurants, on_delete=models.CASCADE, default=1)
 
     def __str__(self):
         return self.item_name

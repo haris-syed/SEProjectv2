@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<html lang="en" class="no-js">
+
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Login</title>
+    <link rel="icon" type="img/png"
+        href="https://proxy.duckduckgo.com/iu/?u=http%3A%2F%2Fwww.designbolts.com%2Fwp-content%2Fuploads%2F2016%2F04%2FS-letter-Logo-Design.jpg&f=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <meta name="description" content="Login and Registration Form with HTML5 and CSS3" /> -->
+    <meta name="keywords" content="html5, css3, form, switch, animation, :target, pseudo-class" />
+    <meta name="author" content="Codrops" />
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'siahatapp/css/demo.css' %}">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'siahatapp/css/style1.css' %}">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'siahatapp/css/animate-custom.css' %}">
+
+<body>
+    {% load crispy_forms_tags %}
+    <div class="container">
+        <section>
+            <div id="wrapper">
+                <div id="login" class="animate form">
+                    <form method="POST">
+                        <h1> Sign up </h1>
+                        {{ form|crispy }}
+                        {{ profile_form|crispy }}
+                        {% csrf_token %}
+                        <p class="signin button">
+                            <input type="submit" value="Sign up" />
+                        </p>
+                        <p class="change_link">
+                            Already a member ?
+                            <a href="{% url 'Login' %}" class="to_register"> Go and log in </a>
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+
+</html>
