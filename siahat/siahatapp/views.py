@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.db.models import Q
 from .models import *
+from django.core.paginator import Paginator
 # Create your views here.
 
 def index(request):
@@ -20,6 +21,9 @@ def hotels(request):
     context={}
     if not (request.GET.get('searchbox',False) or request.GET.get('price',False) or request.GET.get('starrating',False)) :
         hotels = Hotels.objects.all()
+        paginator = Paginator(hotels,2)
+        page = request.GET.get('page')
+        hotels = paginator.get_page(page)
         context = {
             'hotels':hotels
         }
@@ -29,6 +33,9 @@ def hotels(request):
             hotels=Hotels.objects.filter(name__icontains=name)
             # if(not isinstance(hotels,list)):
             #     hotels=[hotels]
+            paginator = Paginator(hotels,6)
+            page = request.GET.get('page')
+            hotels = paginator.get_page(page)
             context = {
             'hotels':hotels
             }
@@ -37,18 +44,27 @@ def hotels(request):
                 price = int(request.GET['price'])
                 starrating=int(request.GET['starrating'])
                 #hotels=Hotels.objects.filter(price__lte=price).filter(star_Rating=starrating)
+                paginator = Paginator(hotels,6)
+                page = request.GET.get('page')
+                hotels = paginator.get_page(page)
                 context = {
                 'hotels':hotels
                 }
             elif (not request.GET['price'] == ''):
                 price = int(request.GET['price'])
                 hotels=Hotels.objects.filter(price__lte=price)
+                paginator = Paginator(hotels,6)
+                page = request.GET.get('page')
+                hotels = paginator.get_page(page)
                 context = {
                 'hotels':hotels
                 }
             elif (not request.GET['starrating'] == ''):
                 starrating=int(request.GET['starrating'])
                 hotels=Hotels.objects.filter(star_Rating=starrating)
+                paginator = Paginator(hotels,6)
+                page = request.GET.get('page')
+                hotels = paginator.get_page(page)
                 context = {
                 'hotels':hotels
                 }
@@ -60,6 +76,9 @@ def restaurants(request):
     context={}
     if not (request.GET.get('searchbox',False) or request.GET.get('cuisine',False) or request.GET.get('starrating',False)) :
         restaurants = Restaurants.objects.all()
+        paginator = Paginator(restaurants,2)
+        page = request.GET.get('page')
+        restaurants = paginator.get_page(page)
         context = {
             'restaurants':restaurants
         }
@@ -69,6 +88,9 @@ def restaurants(request):
             restaurants=Restaurants.objects.filter(name__icontains=name)
             # if(not isinstance(hotels,list)):
             #     hotels=[hotels]
+            paginator = Paginator(restaurants,2)
+            page = request.GET.get('page')
+            restaurants = paginator.get_page(page)
             context = {
             'restaurants':restaurants
             }
@@ -76,6 +98,9 @@ def restaurants(request):
 
 def attractions(request):
     attractions = Attractions.objects.all()
+    paginator = Paginator(attractions,2)
+    page = request.GET.get('page')
+    attractions = paginator.get_page(page)
     context = {
             'attractions':attractions
     }

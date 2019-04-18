@@ -115,15 +115,30 @@
           	<div class="row mt-5">
 		          <div class="col text-center">
 		            <div class="block-27">
-		              <ul>
-		                <li><a href="#">&lt;</a></li>
-		                <li class="active"><span>1</span></li>
-		                <li><a href="#">2</a></li>
-		                <li><a href="#">3</a></li>
-		                <li><a href="#">4</a></li>
-		                <li><a href="#">5</a></li>
-		                <li><a href="#">&gt;</a></li>
-		              </ul>
+		              <span class="step-links">
+
+                  <span class="current">
+                    Page {{ restaurants.number }} of {{ restaurants.paginator.num_pages }}.
+                  </span>
+                  <br>
+                  <ul>
+                  {% if restaurants.has_previous %}
+                    {% comment %} <a href="?page=1">&laquo; first &ensp;</a> {% endcomment %}
+                    <li><a href="?page=1">&lt; &lt;</a></li>
+                    <li><a href="?page={{ restaurants.previous_page_number }}">&lt;</a></li>
+                    {% comment %} <a href="?page={{ restaurants.previous_page_number }}">previous</a> {% endcomment %}
+                  {% endif %}
+
+                  
+
+                  {% if restaurants.has_next %}
+                    {% comment %} <a href="?page={{ restaurants.next_page_number }}">next</a> {% endcomment %}
+                    <li><a href="?page={{ restaurants.next_page_number }}">&gt;</a></li>
+                    {% comment %} <a href="?page={{ restaurants.paginator.num_pages }}">&ensp; last &raquo;</a> {% endcomment %}
+                    <li><a href="?page={{ restaurants.paginator.num_pages }}">&gt;&gt;</a></li>
+                  {% endif %}
+                  </ul>
+                  </span>
 		            </div>
 		          </div>
 		        </div>
