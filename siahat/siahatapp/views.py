@@ -3,6 +3,10 @@ from django.http import HttpResponse
 from django.db.models import Q
 from .models import *
 from django.core.paginator import Paginator
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import redirect
+from django.utils.timezone import now
+
 # Create your views here.
 
 def index(request):
@@ -133,3 +137,29 @@ def Pdetails(request,id):
     'attraction':attraction,
     'sim_attractions':sim_attractions}
     return render(request,'siahatapp/Pdetails.html',context)
+
+def blog(request):
+
+    return render(request,'siahatapp/blog.html')
+
+def blog(request):
+
+    return render(request,'siahatapp/blog.html')
+
+def blogPost(request):
+    return render(request, 'siahatapp/blog_single.html')
+
+@login_required()
+def make_post(request):
+    if request.method == 'POST' :
+        form = PostForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user
+            post.created_date = now()
+            post.publish()
+            return redirect('blog')
+    else:
+        form = PostForm
+    return render(request, 'siahatapp/add_post.html', {'form': form})
+
