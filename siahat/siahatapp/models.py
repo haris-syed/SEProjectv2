@@ -1,15 +1,10 @@
 from django.db import models
-
-# Create your models here.
 from django_mysql.models import ListTextField
 
 class Hotels(models.Model):
     name=models.CharField(max_length=100,blank=True, null=True)
     description=models.TextField(blank=True, null=True)
-    url_Picture = ListTextField(
-        base_field=models.CharField(max_length=100),
-        size=100,
-    )
+    url_Picture = models.ImageField(default='default.jpg',upload_to='profile_pics')
     address=models.TextField(blank=True, null=True)
     star_Rating=models.IntegerField(blank=True, null=True)
 
@@ -23,12 +18,8 @@ class Hotels(models.Model):
 class Restaurants(models.Model):
     name=models.CharField(max_length=100,blank=True, null=True)
     description=models.TextField(blank=True, null=True)
-    opening_Time=models.TimeField(auto_now_add=True, blank=True)
-    url_Picture = ListTextField(
-        base_field=models.CharField(max_length=100,blank=True, null=True),
-        size=100,
-        default='1',
-    )
+    opening_Time=models.TimeField(auto_now_add=False, blank=True)
+    url_Picture = models.ImageField(default='default.jpg',upload_to='profile_pics')
     address=models.TextField(blank=True, null=True)
     star_Rating=models.IntegerField(blank=True, null=True)
 
@@ -37,6 +28,7 @@ class Restaurants(models.Model):
 
     class Meta:
         verbose_name_plural="Restaurants"
+
 
 h_type = (
     ('hotel','HOTEL'),

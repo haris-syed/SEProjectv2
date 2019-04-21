@@ -1,204 +1,222 @@
+{% extends "siahatapp/mainbase.html" %}
+{% load static %}
+{% block content %}
 
- {% extends "siahatapp/mainbase.html" %} 
- {% load static %}
- {% block content %}
-    
-    <div class="hero-wrap js-fullheight" style="background-image: url({% static 'siahatapp/images/isloo_1.jpg' %});">
-      <div class="overlay"></div>
-      <div class="container">
-        <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center" data-scrollax-parent="true">
-          <div class="col-md-9 ftco-animate text-center" data-scrollax=" properties: { translateY: '70%' }">
-            <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="/">Home</a></span> <span>Hotel</span></p>
-            <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '90%', opacity: 5.0 }">Hotels</h1>
-          </div>
-        </div>
-      </div>
-    </div>
-
-
-    <section class="ftco-section ftco-degree-bg">
-      <div class="container">
-          <div class="row">
-					<div class="col-lg-3 sidebar">
-        		<div class="sidebar-wrap bg-light ftco-animate">
-        			<h3 class="heading mb-4">Find Hotel</h3>
-        			<form action="/hotels" method="get">
-        				<div class="fields">
-		              <div class="form-group">
-		                <input name="searchbox" type="text" class="form-control" placeholder="Hotel name">
-		              </div>
-		              <div class="form-group">
-		                <div class="select-wrap one-third">
-	                    <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-	                    <select name="price" id="prc" class="form-control" placeholder="Keyword search">
-	                      <option value="">Price range</option>
-	                      <option value="5000">Rs.5000</option>
-	                      <option value="10000">Rs.10000</option>
-	                      <option value="20000">Rs. 20000</option>
-	                      <option value="50000">Rs. 50000</option>
-	                    </select>
-	                  </div>
-		              </div>
-		              <h3 class="heading mb-4">Star Rating</h3>
-                  <div class="form-check">
-									<input name="starrating" type="radio" class="form-check-input" value="5">
-									<label class="form-check-label" for="exampleCheck1">
-										<p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></span></p>
-									</label>
-							  </div>
-							  <div class="form-check">
-						      <input name="starrating" type="radio" class="form-check-input" value="4">
-						      <label class="form-check-label" for="exampleCheck1">
-						    	   <p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star-o"></i></span></p>
-						      </label>
-							  </div>
-							  <div class="form-check">
-						      <input name="starrating" type="radio" class="form-check-input" value="3">
-						      <label class="form-check-label" for="exampleCheck1">
-						      	<p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star-o"></i><i class="icon-star-o"></i></span></p>
-						     </label>
-							  </div>
-							  <div class="form-check">
-							    <input name="starrating" type="radio" class="form-check-input" value="2">
-						      <label class="form-check-label" for="exampleCheck1">
-						      	<p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star-o"></i><i class="icon-star-o"></i><i class="icon-star-o"></i></span></p>
-						      </label>
-							  </div>
-							  
-		              <div class="form-group">
-		                <input name="sbutton" type="submit" class="btn btn-primary py-3 px-5">
-		              </div>
-		            </div>
-	            </form>
-        		</div>
-					</div>
-          <div class="col-lg-9">
-          	<div class="row">
-
-						{% for h in hotels %}
-          		<div class="col-md-4 ftco-animate">
-		    				<div class="destination">
-		    					<a href="http://127.0.0.1:8000/hotels/details/{{h.id}}" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url({% static h.url_Picture.0|slice:"1:-1" %});">
-					
-		    						<div class="icon d-flex justify-content-center align-items-center">
-    							<span class="icon-search2"></span>
-    						</div>
-		    					</a>
-		    					<div class="text p-3">
-		    						<div class="d-flex">
-		    							<div class="one">
-				    						<h3><a href="http://127.0.0.1:8000/hotels/details/{{h.id}}">{{h.name}}</a></h3>
-				    						<p class="rate">
-													{% with ''|center:h.star_Rating as range %}
-													{% for _ in range %}
-     													<i class="icon-star"></i>
-													{% endfor %}
-													{% endwith %}
-				    							
-				    							<span>{{h.star_Rating}} Rating</span>
-				    						</p>
-			    						</div>
-			    						<div class="two">
-			    							<span class="price per-price">$40<br><small>/night</small></span>
-		    							</div>
-		    						</div>
-		    						<p>{{h.description|slice:"0:40"}}</p>
-		    						<hr>
-		    						<p class="bottom-area d-flex">
-		    							<span><i class="icon-map-o"></i> Islamabad </span> 
-		    						</p>
-		    					</div>
-		    				</div>
-		    			</div>
-		    		{% endfor %}	
-		    			
-
-
-          	</div>
-          	<div class="row mt-5">
-		          <div class="col text-center">
-		            <div class="block-27">
-		              <ul>
-		                <li><a href="#">&lt;</a></li>
-		                <li class="active"><span>1</span></li>
-		                <li><a href="#">2</a></li>
-		                <li><a href="#">3</a></li>
-		                <li><a href="#">4</a></li>
-		                <li><a href="#">5</a></li>
-		                <li><a href="#">&gt;</a></li>
-		              </ul>
-		            </div>
-		          </div>
-		        </div>
-          </div> <!-- .col-md-8 -->
-        </div>
-      </div>
-    </section> <!-- .section -->
-		<div>
+<div class="hero-wrap js-fullheight" style="background-image: url({% static 'siahatapp/images/isloo_1.jpg' %});">
+	<div class="overlay"></div>
+	<div class="container">
+		<div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center"
+			data-scrollax-parent="true">
+			<div class="col-md-9 ftco-animate text-center" data-scrollax=" properties: { translateY: '70%' }">
+				<p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span
+						class="mr-2"><a href="/">Home</a></span> <span>Hotel</span></p>
+				<h1 class="mb-3 bread" data-scrollax="properties: { translateY: '90%', opacity: 5.0 }">Hotels</h1>
+			</div>
 		</div>
-    <footer class="ftco-footer ftco-bg-dark ftco-section">
-      <div class="container">
-        <div class="row mb-5">
-          <div class="col-md">
-            <div class="ftco-footer-widget mb-4">
-              <h2 class="ftco-heading-2">Siahat</h2>
-              <p>Make the best out of your vacation in the wonderful city of Islamabad</p>
-              <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
-                <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-                <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-                <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-md">
-            <div class="ftco-footer-widget mb-4 ml-md-5">
-              <h2 class="ftco-heading-2">Information</h2>
-              <ul class="list-unstyled">
-                <li><a href="#" class="py-2 d-block">About</a></li>
-                <li><a href="#" class="py-2 d-block">Service</a></li>
-                <li><a href="#" class="py-2 d-block">Terms and Conditions</a></li>
-                <li><a href="#" class="py-2 d-block">Become a partner</a></li>
-                <li><a href="#" class="py-2 d-block">Best Price Guarantee</a></li>
-                <li><a href="#" class="py-2 d-block">Privacy and Policy</a></li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-md">
-             <div class="ftco-footer-widget mb-4">
-              <h2 class="ftco-heading-2">Customer Support</h2>
-              <ul class="list-unstyled">
-                <li><a href="#" class="py-2 d-block">FAQ</a></li>
-                <li><a href="#" class="py-2 d-block">How it works</a></li>
-                <li><a href="#" class="py-2 d-block">Contact Us</a></li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-md">
-            <div class="ftco-footer-widget mb-4">
-            	<h2 class="ftco-heading-2">Have a Question?</h2>
-            	<div class="block-23 mb-3">
-	              <ul>
-	                <li><span class="icon icon-map-marker"></span><span class="text">A.K. Brohi Road, H-11/4, Islamabad, Pakistan</span></li>
-	                <li><a href="#"><span class="icon icon-phone"></span><span class="text">0900 78601</span></a></li>
-	                <li><a href="#"><span class="icon icon-envelope"></span><span class="text">info@siahat.com</span></a></li>
-	              </ul>
-	            </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12 text-center">
+	</div>
+</div>
 
-            <p>
-  					Siahat &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved
-  					</p>
-          </div>
-        </div>
-      </div>
-    </footer>
+
+<section class="ftco-section ftco-degree-bg">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-3 sidebar">
+				<div class="sidebar-wrap bg-light ftco-animate">
+					<h3 class="heading mb-4">Find Hotel</h3>
+					<form action="/hotels" method="get">
+						<div class="fields">
+							<div class="form-group">
+								<input name="searchbox" type="text" class="form-control" placeholder="Hotel name">
+							</div>
+							<div class="form-group">
+								<div class="select-wrap one-third">
+									<div class="icon"><span class="ion-ios-arrow-down"></span></div>
+									<select name="price" id="prc" class="form-control" placeholder="Keyword search">
+										<option value="">Price range</option>
+										<option value="5000">Rs.5000</option>
+										<option value="10000">Rs.10000</option>
+										<option value="20000">Rs. 20000</option>
+										<option value="50000">Rs. 50000</option>
+									</select>
+								</div>
+							</div>
+							<h3 class="heading mb-4">Star Rating</h3>
+							<div class="form-check">
+								<input name="starrating" type="radio" class="form-check-input" value="5">
+								<label class="form-check-label" for="exampleCheck1">
+									<p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i
+												class="icon-star"></i><i class="icon-star"></i><i
+												class="icon-star"></i></span></p>
+								</label>
+							</div>
+							<div class="form-check">
+								<input name="starrating" type="radio" class="form-check-input" value="4">
+								<label class="form-check-label" for="exampleCheck1">
+									<p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i
+												class="icon-star"></i><i class="icon-star"></i><i
+												class="icon-star-o"></i></span></p>
+								</label>
+							</div>
+							<div class="form-check">
+								<input name="starrating" type="radio" class="form-check-input" value="3">
+								<label class="form-check-label" for="exampleCheck1">
+									<p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i
+												class="icon-star"></i><i class="icon-star-o"></i><i
+												class="icon-star-o"></i></span></p>
+								</label>
+							</div>
+							<div class="form-check">
+								<input name="starrating" type="radio" class="form-check-input" value="2">
+								<label class="form-check-label" for="exampleCheck1">
+									<p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i
+												class="icon-star-o"></i><i class="icon-star-o"></i><i
+												class="icon-star-o"></i></span></p>
+								</label>
+							</div>
+
+							<div class="form-group">
+								<input name="sbutton" type="submit" class="btn btn-primary py-3 px-5">
+							</div>
+						</div>
+					</form>
+					<div class="form-group">
+						<a href="{% url 'addHotel' %}">
+							<button class="btn btn-primary py-3 px-5">Add Hotel</button>
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-9">
+				<div class="row">
+
+					{% for h in hotels %}
+					<div class="col-md-4 ftco-animate">
+						<div class="destination">
+							<a href="http://127.0.0.1:8000/hotels/details/{{h.id}}"
+								class="img img-2 d-flex justify-content-center align-items-center"
+								style="background-image: url({% static h.url_Picture.0|slice:"1:-1" %});">
+
+								<div class="icon d-flex justify-content-center align-items-center">
+									<span class="icon-search2"></span>
+								</div>
+							</a>
+							<div class="text p-3">
+								<div class="d-flex">
+									<div class="one">
+										<h3><a href="http://127.0.0.1:8000/hotels/details/{{h.id}}">{{h.name}}</a></h3>
+										<p class="rate">
+											{% with ''|center:h.star_Rating as range %}
+											{% for _ in range %}
+											<i class="icon-star"></i>
+											{% endfor %}
+											{% endwith %}
+
+											<span>{{h.star_Rating}} Rating</span>
+										</p>
+									</div>
+									<div class="two">
+										<span class="price per-price">$40<br><small>/night</small></span>
+									</div>
+								</div>
+								<p>{{h.description|slice:"0:40"}}</p>
+								<hr>
+								<p class="bottom-area d-flex">
+									<span><i class="icon-map-o"></i> Islamabad </span>
+								</p>
+							</div>
+						</div>
+					</div>
+					{% endfor %}
+
+
+
+				</div>
+				<div class="row mt-5">
+					<div class="col text-center">
+						<div class="block-27">
+							<ul>
+								<li><a href="#">&lt;</a></li>
+								<li class="active"><span>1</span></li>
+								<li><a href="#">2</a></li>
+								<li><a href="#">3</a></li>
+								<li><a href="#">4</a></li>
+								<li><a href="#">5</a></li>
+								<li><a href="#">&gt;</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div> <!-- .col-md-8 -->
+		</div>
+	</div>
+</section> <!-- .section -->
+<div>
+</div>
+<footer class="ftco-footer ftco-bg-dark ftco-section">
+	<div class="container">
+		<div class="row mb-5">
+			<div class="col-md">
+				<div class="ftco-footer-widget mb-4">
+					<h2 class="ftco-heading-2">Siahat</h2>
+					<p>Make the best out of your vacation in the wonderful city of Islamabad</p>
+					<ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
+						<li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+						<li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
+						<li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-md">
+				<div class="ftco-footer-widget mb-4 ml-md-5">
+					<h2 class="ftco-heading-2">Information</h2>
+					<ul class="list-unstyled">
+						<li><a href="#" class="py-2 d-block">About</a></li>
+						<li><a href="#" class="py-2 d-block">Service</a></li>
+						<li><a href="#" class="py-2 d-block">Terms and Conditions</a></li>
+						<li><a href="#" class="py-2 d-block">Become a partner</a></li>
+						<li><a href="#" class="py-2 d-block">Best Price Guarantee</a></li>
+						<li><a href="#" class="py-2 d-block">Privacy and Policy</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-md">
+				<div class="ftco-footer-widget mb-4">
+					<h2 class="ftco-heading-2">Customer Support</h2>
+					<ul class="list-unstyled">
+						<li><a href="#" class="py-2 d-block">FAQ</a></li>
+						<li><a href="#" class="py-2 d-block">How it works</a></li>
+						<li><a href="#" class="py-2 d-block">Contact Us</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-md">
+				<div class="ftco-footer-widget mb-4">
+					<h2 class="ftco-heading-2">Have a Question?</h2>
+					<div class="block-23 mb-3">
+						<ul>
+							<li><span class="icon icon-map-marker"></span><span class="text">A.K. Brohi Road, H-11/4,
+									Islamabad,
+									Pakistan</span></li>
+							<li><a href="#"><span class="icon icon-phone"></span><span class="text">0900
+										78601</span></a></li>
+							<li><a href="#"><span class="icon icon-envelope"></span><span
+										class="text">info@siahat.com</span></a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12 text-center">
+
+				<p>
+					Siahat &copy;
+					<script>document.write(new Date().getFullYear());</script> All rights reserved
+				</p>
+			</div>
+		</div>
+	</div>
+</footer>
+
 
 {% endblock %}
-	   
-  
-
- 

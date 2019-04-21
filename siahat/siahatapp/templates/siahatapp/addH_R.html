@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> Add </title>
+
+    <meta charset="UTF-8" />
+    <link rel="icon" type="img/png"
+        href="https://proxy.duckduckgo.com/iu/?u=http%3A%2F%2Fwww.designbolts.com%2Fwp-content%2Fuploads%2F2016%2F04%2FS-letter-Logo-Design.jpg&f=1" />
+
+
+</head>
+
+<body>
+    {% load crispy_forms_tags %}
+
+
+    <h2>Add</h2>
+    <form method="POST">{% csrf_token %}
+        {{ form|crispy }}
+        <button type="submit" class="save btn btn-default">Save</button>
+    </form>
+</body>
+
+</html>

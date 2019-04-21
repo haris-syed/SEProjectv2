@@ -79,10 +79,12 @@
           <li class="nav-item"><a href="/blog" class="nav-link">Blog</a></li>
           <li class="nav-item"><a href="/contact" class="nav-link">Contact</a></li>
           <li class="nav-item"></li>
-          {% if user.profile.is_authenticated %}
+          {% if user.is_authenticated %}
           <li class="nav-item">
             <div class="dropdown">
-              <img class="rounded-circle account-img" src="{{user.profile.ProfilePicture.url}}" width="50" height="50">
+              <!-- <img class="rounded-circle account-img" src="{{user.profile.ProfilePicture.url}}" width="50" height="50"> -->
+              <img class="rounded-circle account-img" src="{% static 'siahatapp/images/def.png' %}" width="50" height="50">
+
               <div class="dropdown-content">
                 <a href="{% url 'profile' %}">Profile</a>
                 <a href="{% url 'Logout' %}">Logout</a>
