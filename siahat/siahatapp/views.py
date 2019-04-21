@@ -138,16 +138,24 @@ def Pdetails(request,id):
     'sim_attractions':sim_attractions}
     return render(request,'siahatapp/Pdetails.html',context)
 
-def blog(request):
-
-    return render(request,'siahatapp/blog.html')
 
 def blog(request):
+    posts = Post.objects.all()
+    paginator = Paginator(posts,10)
+    page = request.GET.get('page')
+    posts = paginator.get_page(page)
+    context = {
+        'posts':posts
+    }
+    return render(request,'siahatapp/blog.html',context)
 
-    return render(request,'siahatapp/blog.html')
-
-def blogPost(request):
-    return render(request, 'siahatapp/blog_single.html')
+def blogPost(request,id):
+    post = Post.objects.get(id=id)
+    recent_blogs = Post.objects.all().filter(author=post.author)[:3]
+    context = {'id':id,
+    'post':post,
+    'recent_blogs':recent_blogs}
+    return render(request, 'siahatapp/blog_single.html',context)
 
 @login_required()
 def make_post(request):
@@ -156,6 +164,7 @@ def make_post(request):
         if form.is_valid():
             post = form.save(commit=False)
             post.author = request.user
+            post.picture = request.FILES['picture']
             post.created_date = now()
             post.publish()
             return redirect('blog')

@@ -96,6 +96,7 @@ class Attractions(models.Model):
 class Post(models.Model): 
     author = models.ForeignKey(User, on_delete=models.CASCADE) 
     title = models.CharField(max_length=200) 
+    picture=models.ImageField(default='default.jpg',upload_to='post_pictures')
     text = RichTextField(blank=True, null=True)
     created_date = models.DateTimeField(default=timezone.now) 
     published_date = models.DateTimeField(blank=True, null=True) 
@@ -111,4 +112,4 @@ class Post(models.Model):
 class PostForm(ModelForm):
     class Meta:
         model = Post
-        fields = ['title','text']
+        fields = ['title','text','picture']
