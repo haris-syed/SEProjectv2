@@ -205,6 +205,80 @@
 					<script>document.write(new Date().getFullYear());</script> All rights reserved
 				</p>
 			</div>
+          <div class="col-lg-9">
+          	<div class="row">
+						{% for h in restaurants %}
+          		<div class="col-md-4 ftco-animate">
+		    				<div class="destination">
+		    					<a href="http://127.0.0.1:8000/restaurants/details/{{h.id}}" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url({% static h.url_Picture.0|slice:"1:-1" %});">
+					
+		    						<div class="icon d-flex justify-content-center align-items-center">
+    							<span class="icon-search2"></span>
+    						</div>
+		    					</a>
+		    					<div class="text p-3">
+		    						<div class="d-flex">
+		    							<div class="one">
+				    						<h3><a href="http://127.0.0.1:8000/restaurants/details/{{h.id}}">{{h.name}}</a></h3>
+				    						<p class="rate">
+													{% with ''|center:h.star_Rating as range %}
+													{% for _ in range %}
+     													<i class="icon-star"></i>
+													{% endfor %}
+													{% endwith %}
+				    							
+				    							<span>{{h.star_Rating}} Rating</span>
+				    						</p>
+			    						</div>
+		    						</div>
+		    						<p>{{h.description|slice:"0:40"}}</p>
+		    						<hr>
+		    						<p class="bottom-area d-flex">
+		    							<span><i class="icon-map-o"></i> Islamabad </span> 
+		    						</p>
+		    					</div>
+		    				</div>
+		    			</div>
+		    		{% endfor %}	
+		    			
+
+
+          	</div>
+          	<div class="row mt-5">
+		          <div class="col text-center">
+		            <div class="block-27">
+		              <span class="step-links">
+
+                  <span class="current">
+                    Page {{ restaurants.number }} of {{ restaurants.paginator.num_pages }}.
+                  </span>
+                  <br>
+                  <ul>
+                  {% if restaurants.has_previous %}
+                    {% comment %} <a href="?page=1">&laquo; first &ensp;</a> {% endcomment %}
+                    <li><a href="?page=1">&lt; &lt;</a></li>
+                    <li><a href="?page={{ restaurants.previous_page_number }}">&lt;</a></li>
+                    {% comment %} <a href="?page={{ restaurants.previous_page_number }}">previous</a> {% endcomment %}
+                  {% endif %}
+
+                  
+
+                  {% if restaurants.has_next %}
+                    {% comment %} <a href="?page={{ restaurants.next_page_number }}">next</a> {% endcomment %}
+                    <li><a href="?page={{ restaurants.next_page_number }}">&gt;</a></li>
+                    {% comment %} <a href="?page={{ restaurants.paginator.num_pages }}">&ensp; last &raquo;</a> {% endcomment %}
+                    <li><a href="?page={{ restaurants.paginator.num_pages }}">&gt;&gt;</a></li>
+                  {% endif %}
+                  </ul>
+                  </span>
+		            </div>
+		          </div>
+		        </div>
+          </div> <!-- .col-md-8 -->
+        </div>
+      </div>
+    </section> <!-- .section -->
+		<div>
 		</div>
 	</div>
 </footer>

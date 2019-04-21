@@ -1,0 +1,136 @@
+{% extends "siahatapp/mainbase.html" %} 
+ {% load static %}
+{% block content %}
+    
+    <div class="hero-wrap js-fullheight" style="background-image: url({% static 'siahatapp/images/rts_1.jpg' %});">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center" data-scrollax-parent="true">
+          <div class="col-md-9 ftco-animate text-center" data-scrollax=" properties: { translateY: '70%' }">
+            <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="/">Home</a></span> <span>Blog</span></p>
+            <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Tips &amp; Articles</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <section class="ftco-section bg-light">
+
+    
+      <div class="container">
+        <div class="row d-flex">
+        {% for p in posts %}
+          <div class="col-md-3 d-flex ftco-animate">
+            <div class="blog-entry ">
+              <a href="blog/posts/{{p.id}}" class="block-20" style="background-image: url('http://localhost:8000/media/{{p.picture}}');">
+              </a>
+              <div class="text p-4 d-block">
+              	<span class="tag">Tips, Travel</span>
+                <h3 class="heading mt-3"><a href="blog/posts/{{p.id}}">{{p.title}}</a></h3>
+                <div class="meta mb-3">
+                  <div>{{p.created_date}}</a></div>
+                  <div>{{p.author.username}}</a></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {%endfor%}
+        </div>
+      </div>
+
+        <div class="row mt-5">
+          <div class="col text-center">
+            <div class="block-27">
+              <span class="step-links">
+
+                  <span class="current">
+                    Page {{ posts.number }} of {{ posts.paginator.num_pages }}.
+                  </span>
+                  <br>
+                  <ul>
+                  {% if posts.has_previous %}
+                    {% comment %} <a href="?page=1">&laquo; first &ensp;</a> {% endcomment %}
+                    <li><a href="?page=1">&lt; &lt;</a></li>
+                    <li><a href="?page={{ posts.previous_page_number }}">&lt;</a></li>
+                    {% comment %} <a href="?page={{ posts.previous_page_number }}">previous</a> {% endcomment %}
+                  {% endif %}
+
+                  
+
+                  {% if posts.has_next %}
+                    {% comment %} <a href="?page={{ posts.next_page_number }}">next</a> {% endcomment %}
+                    <li><a href="?page={{ posts.next_page_number }}">&gt;</a></li>
+                    {% comment %} <a href="?page={{ posts.paginator.num_pages }}">&ensp; last &raquo;</a> {% endcomment %}
+                    <li><a href="?page={{ posts.paginator.num_pages }}">&gt;&gt;</a></li>
+                  {% endif %}
+                  </ul>
+                  </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="ftco-footer ftco-bg-dark ftco-section">
+      <div class="container">
+        <div class="row mb-5">
+          <div class="col-md">
+            <div class="ftco-footer-widget mb-4">
+              <h2 class="ftco-heading-2">Siahat</h2>
+              <p>Make the best out of your vacation in the wonderful city of Islamabad</p>
+              <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
+                <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+                <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
+                <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md">
+            <div class="ftco-footer-widget mb-4 ml-md-5">
+              <h2 class="ftco-heading-2">Information</h2>
+              <ul class="list-unstyled">
+                <li><a href="#" class="py-2 d-block">About</a></li>
+                <li><a href="#" class="py-2 d-block">Service</a></li>
+                <li><a href="#" class="py-2 d-block">Terms and Conditions</a></li>
+                <li><a href="#" class="py-2 d-block">Become a partner</a></li>
+                <li><a href="#" class="py-2 d-block">Best Price Guarantee</a></li>
+                <li><a href="#" class="py-2 d-block">Privacy and Policy</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md">
+             <div class="ftco-footer-widget mb-4">
+              <h2 class="ftco-heading-2">Customer Support</h2>
+              <ul class="list-unstyled">
+                <li><a href="#" class="py-2 d-block">FAQ</a></li>
+                <li><a href="#" class="py-2 d-block">How it works</a></li>
+                <li><a href="#" class="py-2 d-block">Contact Us</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md">
+            <div class="ftco-footer-widget mb-4">
+            	<h2 class="ftco-heading-2">Have a Question?</h2>
+            	<div class="block-23 mb-3">
+	              <ul>
+	                <li><span class="icon icon-map-marker"></span><span class="text">A.K. Brohi Road, H-11/4, Islamabad, Pakistan</span></li>
+	                <li><a href="#"><span class="icon icon-phone"></span><span class="text">0900 78601</span></a></li>
+	                <li><a href="#"><span class="icon icon-envelope"></span><span class="text">info@siahat.com</span></a></li>
+	              </ul>
+	            </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 text-center">
+
+            <p>
+  					Siahat &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved
+  					</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+    
+{% endblock %}

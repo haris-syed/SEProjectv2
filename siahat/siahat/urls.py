@@ -25,6 +25,7 @@ from django.contrib.auth.models import User
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('ckeditor/', include ('ckeditor_uploader.urls')),
     path('',include('siahatapp.urls')),
     path('Signup', user_views.Signup, name='Signup'),
     path('profile', user_views.profile, name='profile'),

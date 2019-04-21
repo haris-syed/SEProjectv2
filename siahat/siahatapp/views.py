@@ -5,6 +5,11 @@ from .models import *
 from .models import Hotels
 from .forms import hotel_infoForm
 from .forms import restaurant_infoForm
+from django.core.paginator import Paginator
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import redirect
+from django.utils.timezone import now
+
 # Create your views here.
 
 
@@ -25,6 +30,9 @@ def hotels(request):
     context = {}
     if not (request.GET.get('searchbox', False) or request.GET.get('price', False) or request.GET.get('starrating', False)):
         hotels = Hotels.objects.all()
+        paginator = Paginator(hotels,2)
+        page = request.GET.get('page')
+        hotels = paginator.get_page(page)
         context = {
             'hotels': hotels
         }
@@ -34,6 +42,9 @@ def hotels(request):
             hotels = Hotels.objects.filter(name__icontains=name)
             # if(not isinstance(hotels,list)):
             #     hotels=[hotels]
+            paginator = Paginator(hotels,6)
+            page = request.GET.get('page')
+            hotels = paginator.get_page(page)
             context = {
             'hotels': hotels
             }
@@ -42,18 +53,27 @@ def hotels(request):
                 price = int(request.GET['price'])
                 starrating = int(request.GET['starrating'])
                 #hotels=Hotels.objects.filter(price__lte=price).filter(star_Rating=starrating)
+                paginator = Paginator(hotels,6)
+                page = request.GET.get('page')
+                hotels = paginator.get_page(page)
                 context = {
                 'hotels': hotels
                 }
             elif (not request.GET['price'] == ''):
                 price = int(request.GET['price'])
-                hotels = Hotels.objects.filter(price__lte=price)
+                hotels=Hotels.objects.filter(price__lte=price)
+                paginator = Paginator(hotels,6)
+                page = request.GET.get('page')
+                hotels = paginator.get_page(page)
                 context = {
                 'hotels': hotels
                 }
             elif (not request.GET['starrating'] == ''):
-                starrating = int(request.GET['starrating'])
-                hotels = Hotels.objects.filter(star_Rating=starrating)
+                starrating=int(request.GET['starrating'])
+                hotels=Hotels.objects.filter(star_Rating=starrating)
+                paginator = Paginator(hotels,6)
+                page = request.GET.get('page')
+                hotels = paginator.get_page(page)
                 context = {
                 'hotels': hotels
                 }
@@ -65,6 +85,9 @@ def restaurants(request):
     context = {}
     if not (request.GET.get('searchbox', False) or request.GET.get('cuisine', False) or request.GET.get('starrating', False)):
         restaurants = Restaurants.objects.all()
+        paginator = Paginator(restaurants,2)
+        page = request.GET.get('page')
+        restaurants = paginator.get_page(page)
         context = {
             'restaurants': restaurants
         }
@@ -74,6 +97,9 @@ def restaurants(request):
             restaurants = Restaurants.objects.filter(name__icontains=name)
             # if(not isinstance(hotels,list)):
             #     hotels=[hotels]
+            paginator = Paginator(restaurants,2)
+            page = request.GET.get('page')
+            restaurants = paginator.get_page(page)
             context = {
             'restaurants': restaurants
             }
@@ -82,6 +108,9 @@ def restaurants(request):
 
 def attractions(request):
     attractions = Attractions.objects.all()
+    paginator = Paginator(attractions,2)
+    page = request.GET.get('page')
+    attractions = paginator.get_page(page)
     context = {
             'attractions': attractions
     }
@@ -143,3 +172,38 @@ def addRestaurant(request):
     else:
         restaurant_form = restaurant_infoForm()
         return render(request, 'siahatapp/addH_R.html', {'form': restaurant_form})
+
+
+def blog(request):
+    posts = Post.objects.all()
+    paginator = Paginator(posts,10)
+    page = request.GET.get('page')
+    posts = paginator.get_page(page)
+    context = {
+        'posts':posts
+    }
+    return render(request,'siahatapp/blog.html',context)
+
+def blogPost(request,id):
+    post = Post.objects.get(id=id)
+    recent_blogs = Post.objects.all().filter(author=post.author)[:3]
+    context = {'id':id,
+    'post':post,
+    'recent_blogs':recent_blogs}
+    return render(request, 'siahatapp/blog_single.html',context)
+
+@login_required()
+def make_post(request):
+    if request.method == 'POST' :
+        form = PostForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user
+            post.picture = request.FILES['picture']
+            post.created_date = now()
+            post.publish()
+            return redirect('blog')
+    else:
+        form = PostForm
+    return render(request, 'siahatapp/add_post.html', {'form': form})
+

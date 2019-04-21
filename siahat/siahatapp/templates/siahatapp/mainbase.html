@@ -29,6 +29,8 @@
     <link rel="stylesheet" href="{% static 'siahatapp/css/icomoon.css' %}">
     <link rel="stylesheet" href="{% static 'siahatapp/css/style.css' %}">
 
+    
+
     <style>
     .dropdown {
       position: relative;
@@ -73,9 +75,9 @@
         <ul class="navbar-nav ml-auto">
           <li class="nav-item"><a href="/" class="nav-link">Home</a></li>
           <li class="nav-item"><a href="/about" class="nav-link">About</a></li>
-          <li class="nav-item active"><a href="/hotels" class="nav-link">Hotels</a></li>
-          <li class="nav-item active"><a href="/restaurants" class="nav-link">Restaurants</a></li>
-          <li class="nav-item active"><a href="/attractions" class="nav-link">Attractions</a></li>
+          <li class="nav-item active"><a href="/hotels?page=1" class="nav-link">Hotels</a></li>
+          <li class="nav-item active"><a href="/restaurants?page=1" class="nav-link">Restaurants</a></li>
+          <li class="nav-item active"><a href="/attractions?page=1" class="nav-link">Attractions</a></li>
           <li class="nav-item"><a href="/blog" class="nav-link">Blog</a></li>
           <li class="nav-item"><a href="/contact" class="nav-link">Contact</a></li>
           <li class="nav-item"></li>
@@ -87,6 +89,7 @@
 
               <div class="dropdown-content">
                 <a href="{% url 'profile' %}">Profile</a>
+                <a href="{% url 'make_post' %}">Add a post</a>
                 <a href="{% url 'Logout' %}">Logout</a>
               </div>
             </div>
@@ -132,6 +135,5 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
   <script src="{% static 'siahatapp/js/google-map.js' %}"></script>
   <script src="{% static 'siahatapp/js/main.js' %}"></script>
-    
   </body>
 </html>
